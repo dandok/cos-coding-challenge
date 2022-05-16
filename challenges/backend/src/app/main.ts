@@ -1,8 +1,10 @@
-import {Container} from "inversify";
-import {ILogger} from "./services/Logger/interface/ILogger";
-import {Logger} from "./services/Logger/classes/Logger";
-import {DependencyIdentifier} from "./DependencyIdentifiers";
-import {AuctionMonitorApp} from "./AuctionMonitorApp";
+import { Container } from 'inversify';
+import { ILogger } from './services/Logger/interface/ILogger';
+import { Logger } from './services/Logger/classes/Logger';
+import { DependencyIdentifier } from './DependencyIdentifiers';
+import { AuctionMonitorApp } from './AuctionMonitorApp';
+import { CarOnSaleClient } from './services/CarOnSaleClient/classes/CarOnSaleClient';
+import CarOnSaleClientService from './services/CarOnSaleClient/classes/CarOnSaleClientService';
 
 /*
  * Create the DI container.
@@ -15,7 +17,8 @@ const container = new Container({
  * Register dependencies in DI environment.
  */
 container.bind<ILogger>(DependencyIdentifier.LOGGER).to(Logger);
-
+container.bind<CarOnSaleClient>(DependencyIdentifier.CAR_ON_SALE_CLIENT).to(CarOnSaleClient);
+container.bind<CarOnSaleClientService>(DependencyIdentifier.CAR_ON_SALE_SERVICE).to(CarOnSaleClientService);
 
 /*
  * Inject all dependencies in the application & retrieve application instance.
